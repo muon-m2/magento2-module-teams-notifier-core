@@ -41,6 +41,7 @@ class Save extends Action implements HttpPostActionInterface
      *
      * @return \Magento\Backend\Model\View\Result\Redirect
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      * Inherent to handling create-vs-update, two optional encrypted fields, two catch
      * branches, and the "back" redirect — all required by Magento admin controller conventions.
      */

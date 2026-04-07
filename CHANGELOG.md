@@ -6,6 +6,8 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-04-07
+
 ### Added
 - `TeamsNotifierInterface` with `send()` (named channel) and `sendToWebhook()` (ad-hoc URL) methods.
 - `AdaptiveCardMessageInterface` / `AdaptiveCardMessage` — the only message format supported by Teams Workflows webhooks.
