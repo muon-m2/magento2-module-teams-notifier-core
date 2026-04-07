@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="muon" translate="label" sortOrder="500">
+            <label>Muon</label>
+        </tab>
+        <section id="muon_teamsnotifiercore" translate="label" sortOrder="100" showInDefault="1"
+                 showInWebsite="0" showInStore="0">
+            <label>Teams Notifier Core</label>
+            <tab>muon</tab>
+            <resource>Muon_TeamsNotifierCore::config</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Notifications</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="default_channel" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Default Channel Name</label>
+                    <comment>Slug of the channel to use when send() is called without a channel name.</comment>
+                </field>
+                <field id="timeout" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>HTTP Timeout (seconds)</label>
+                    <comment>cURL connection + read timeout for each Teams webhook POST.</comment>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="delivery_mode" translate="label comment" type="select" sortOrder="40"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Delivery Mode</label>
+                    <comment>Synchronous: HTTP POST inline. Asynchronous: enqueue via RabbitMQ with retry.</comment>
+                    <source_model>Muon\TeamsNotifierCore\Model\Config\Source\DeliveryMode</source_model>
+                </field>
+            </group>
+            <group id="queue" translate="label" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Queue &amp; Retry (Async Mode)</label>
+                <field id="max_attempts" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Max Delivery Attempts</label>
+                    <comment>Total attempts before the notification is marked as permanently failed.</comment>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="retry_delay" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Base Retry Delay (seconds)</label>
+                    <comment>Delay before attempt 2. Multiplied by backoff multiplier on each retry.</comment>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="backoff_multiplier" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Backoff Multiplier</label>
+                    <comment>base_delay * multiplier^(attempt-1). Use 1 for constant, 2 for exponential.</comment>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

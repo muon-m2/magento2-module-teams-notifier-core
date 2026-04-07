@@ -1,0 +1,34 @@
+{
+    "muon_teamsnotifiercore_channel": {
+        "column": {
+            "channel_id": true,
+            "name": true,
+            "label": true,
+            "webhook_url": true,
+            "trigger_secret": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true,
+            "template_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MUON_TEAMSNOTIFIERCORE_CHANNEL_NAME": true,
+            "FK_6F421930279151BC32D81EE96D1C1CDE": true
+        }
+    },
+    "muon_teamsnotifiercore_template": {
+        "column": {
+            "template_id": true,
+            "name": true,
+            "label": true,
+            "template_json": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MUON_TEAMSNOTIFIERCORE_TEMPLATE_NAME": true
+        }
+    }
+}

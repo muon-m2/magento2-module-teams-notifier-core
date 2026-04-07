@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Muon_TeamsNotifierCore::root"
+            title="Teams Notifier"
+            translate="title"
+            module="Muon_TeamsNotifierCore"
+            sortOrder="200"
+            parent="Magento_Backend::stores"
+            resource="Muon_TeamsNotifierCore::main"/>
+        <add id="Muon_TeamsNotifierCore::channel"
+            title="Channels"
+            translate="title"
+            module="Muon_TeamsNotifierCore"
+            sortOrder="10"
+            parent="Muon_TeamsNotifierCore::root"
+            action="muon_teamsnotifiercore/channel"
+            resource="Muon_TeamsNotifierCore::channel"/>
+        <add id="Muon_TeamsNotifierCore::template_menu"
+            title="Templates"
+            translate="title"
+            module="Muon_TeamsNotifierCore"
+            sortOrder="20"
+            parent="Muon_TeamsNotifierCore::root"
+            action="muon_teamsnotifiercore/template"
+            resource="Muon_TeamsNotifierCore::template"/>
+    </menu>
+</config>

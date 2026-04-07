@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+    <!--
+        Topic for async Teams notification delivery.
+        Messages are serialised as JSON strings by the Queue\Publisher and deserialised
+        by the Queue\Consumer, avoiding reliance on Magento's data-object serialisation.
+    -->
+    <topic name="muon.teams_notifier_core.send" request="string"/>
+</config>

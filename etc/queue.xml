@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/queue.xsd">
+    <broker topic="muon.teams_notifier_core.send" exchange="magento">
+        <queue name="muon.teams_notifier_core.send"
+               consumer="muonTeamsNotifierCoreSend"
+               handler="Muon\TeamsNotifierCore\Model\Queue\Consumer::process"
+               maxMessages="500"/>
+    </broker>
+</config>

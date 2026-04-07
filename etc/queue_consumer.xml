@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/consumer.xsd">
+    <!--
+        Start with: bin/magento queue:consumers:start muonTeamsNotifierCoreSend
+        maxMessages: consumer exits after this many messages (supervisor restarts it), preventing memory leaks.
+    -->
+    <consumer name="muonTeamsNotifierCoreSend"
+              topic="muon.teams_notifier_core.send"
+              handler="Muon\TeamsNotifierCore\Model\Queue\Consumer::process"
+              connection="amqp"
+              maxMessages="500"/>
+</config>

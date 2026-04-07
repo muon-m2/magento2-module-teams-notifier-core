@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Interface-to-implementation bindings -->
+    <preference for="Muon\TeamsNotifierCore\Api\TeamsNotifierInterface"
+                type="Muon\TeamsNotifierCore\Model\TeamsNotifier"/>
+    <preference for="Muon\TeamsNotifierCore\Api\ChannelRepositoryInterface"
+                type="Muon\TeamsNotifierCore\Model\ChannelRepository"/>
+    <preference for="Muon\TeamsNotifierCore\Api\TemplateRepositoryInterface"
+                type="Muon\TeamsNotifierCore\Model\TemplateRepository"/>
+    <preference for="Muon\TeamsNotifierCore\Api\Data\AdaptiveCardMessageInterface"
+                type="Muon\TeamsNotifierCore\Model\AdaptiveCardMessage"/>
+    <preference for="Muon\TeamsNotifierCore\Api\Data\ChannelInterface"
+                type="Muon\TeamsNotifierCore\Model\Channel"/>
+    <preference for="Muon\TeamsNotifierCore\Api\Data\TemplateInterface"
+                type="Muon\TeamsNotifierCore\Model\Template"/>
+    <preference for="Muon\TeamsNotifierCore\Api\Data\QueuedNotificationInterface"
+                type="Muon\TeamsNotifierCore\Model\Queue\QueuedNotification"/>
+
+    <!-- Payload builder pool: format slug → builder implementation -->
+    <type name="Muon\TeamsNotifierCore\Model\HttpDelivery">
+        <arguments>
+            <argument name="payloadBuilders" xsi:type="array">
+                <item name="adaptive_card" xsi:type="object">
+                    Muon\TeamsNotifierCore\Model\Payload\AdaptiveCardBuilder
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--
+        Inject table name and resource model into the Channel grid SearchResult collection so
+        that the UiComponent DataProvider receives a SearchResultInterface-compatible object.
+    -->
+    <type name="Muon\TeamsNotifierCore\Model\ResourceModel\Channel\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">muon_teamsnotifiercore_channel</argument>
+            <argument name="resourceModel" xsi:type="string">
+                Muon\TeamsNotifierCore\Model\ResourceModel\Channel
+            </argument>
+        </arguments>
+    </type>
+
+    <!--
+        Inject table name and resource model into the Template grid SearchResult collection.
+    -->
+    <type name="Muon\TeamsNotifierCore\Model\ResourceModel\Template\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">muon_teamsnotifiercore_template</argument>
+            <argument name="resourceModel" xsi:type="string">
+                Muon\TeamsNotifierCore\Model\ResourceModel\Template
+            </argument>
+        </arguments>
+    </type>
+
+    <!--
+        Register both grid collections with Magento's UI data-provider factory so that
+        the listing data sources can be resolved automatically.
+    -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="muon_teamsnotifiercore_channel_listing_data_source"
+                      xsi:type="string">
+                    Muon\TeamsNotifierCore\Model\ResourceModel\Channel\Grid\Collection
+                </item>
+                <item name="muon_teamsnotifiercore_template_listing_data_source"
+                      xsi:type="string">
+                    Muon\TeamsNotifierCore\Model\ResourceModel\Template\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

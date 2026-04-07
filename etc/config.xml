@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <muon_teamsnotifiercore>
+            <general>
+                <enabled>1</enabled>
+                <default_channel></default_channel>
+                <timeout>10</timeout>
+                <delivery_mode>sync</delivery_mode>
+            </general>
+            <queue>
+                <max_attempts>3</max_attempts>
+                <retry_delay>60</retry_delay>
+                <backoff_multiplier>2</backoff_multiplier>
+            </queue>
+        </muon_teamsnotifiercore>
+    </default>
+</config>
